@@ -1,0 +1,21 @@
+{
+    "name": "create-basic-scaffold",
+    "version": "1.0.0",
+    "description": "A boilerplate generator",
+    "main": "index.js",
+    "bin": {
+        "create-boilerplate": "./index.js"
+    },
+    "scripts": {
+        "start": "node index.js"
+    },
+    "keywords": [
+        "boilerplate",
+        "generator"
+    ],
+    "author": "Your Name",
+    "license": "MIT",
+    "dependencies": {
+        "inquirer": "^10.0.1"
+    }
+}
