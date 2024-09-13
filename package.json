@@ -1,6 +1,6 @@
 {
     "name": "create-basic-scaffold",
-    "version": "1.0.5",
+    "version": "1.0.8",
     "description": "A boilerplate generator",
     "main": "index.js",
     "bin": {
