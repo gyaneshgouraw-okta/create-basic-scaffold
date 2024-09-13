@@ -3,10 +3,13 @@
 const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
+const cli = require('cac')()
+const prompts = require('prompts');
 
 async function main() {
   try {
-    const projectName = "scaffold"
+    const response = await getUserPrompts();
+    const projectName = response.value;
 
     // Create new directory for the project
     const targetDir = path.join(process.cwd(), projectName);
@@ -33,3 +36,20 @@ function copyTemplateFiles(source, destination, projectName) {
 }
 
 main();
+
+
+function testCliPrompts() {
+  cli.option('--name <name>', 'Provide your name')
+  const parsed = cli.parse()
+  console.log(JSON.stringify(parsed, null, 2))
+}
+
+async function getUserPrompts() {
+  const response = await prompts({
+    type: 'text',
+    name: 'value',
+    message: 'What should be your project name?',
+  });
+  return response
+}
+
