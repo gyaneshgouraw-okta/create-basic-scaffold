@@ -8,14 +8,10 @@ const prompts = require('prompts');
 
 async function main() {
   try {
-    const response = await getUserPrompts();
-    const projectName = response.value;
-
-    // Create new directory for the project
+    const projectName = await getProjectName();
     const targetDir = path.join(process.cwd(), projectName);
     fs.mkdirSync(targetDir);
 
-    // Copy template files
     const templateDir = path.join(__dirname, 'templates');
     copyTemplateFiles(templateDir, targetDir, projectName);
 
@@ -35,13 +31,12 @@ function copyTemplateFiles(source, destination, projectName) {
   });
 }
 
-main();
 
-
-function testCliPrompts() {
+function getCliArguments() {
   cli.option('--name <name>', 'Provide your name')
   const parsed = cli.parse()
-  console.log(JSON.stringify(parsed, null, 2))
+  const projectName = parsed.args[0]
+  return projectName;
 }
 
 async function getUserPrompts() {
@@ -52,4 +47,17 @@ async function getUserPrompts() {
   });
   return response
 }
+
+async function getProjectName() {
+  const cliArgument = getCliArguments();
+  if (cliArgument) {
+    return cliArgument;
+  } else {
+    const response = await getUserPrompts();
+    return response.value;;
+  }
+}
+
+main();
+
 
